@@ -93,6 +93,17 @@ s.replace(
     "blob/main/noxfile.py",
 )
 
+s.replace(
+    "docs/conf.py",
+    "master_doc",
+    "root_doc",
+)
+
+s.replace(
+    "docs/conf.py",
+    "# The master toctree document.",
+    "# The root toctree document.",
+)
 
 # ----------------------------------------------------------------------------
 # Run blacken session
