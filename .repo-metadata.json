@@ -10,6 +10,6 @@
     "repo": "googleapis/python-orchestration-airflow",
     "distribution_name": "google-cloud-orchestration-airflow",
     "api_id": "composer.googleapis.com",
-    "default_version": "",
+    "default_version": "v1",
     "codeowner_team": ""
 }
