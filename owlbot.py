@@ -109,4 +109,9 @@ s.replace(
 # Run blacken session
 # ----------------------------------------------------------------------------
 
+# for testing purposes
+s.replace("noxfile.py",
+'''["']--cov=google/cloud["'],''',
+'''"--cov=google",''')
+
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)
