@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -67,7 +78,7 @@ class EnvironmentsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[EnvironmentsTransport]:
         """Returns an appropriate transport class.
 
@@ -344,7 +355,7 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, EnvironmentsTransport, None] = None,
+        transport: Optional[Union[str, EnvironmentsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -442,12 +453,12 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def create_environment(
         self,
-        request: Union[environments.CreateEnvironmentRequest, dict] = None,
+        request: Optional[Union[environments.CreateEnvironmentRequest, dict]] = None,
         *,
-        parent: str = None,
-        environment: environments.Environment = None,
+        parent: Optional[str] = None,
+        environment: Optional[environments.Environment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Create a new environment.
@@ -565,11 +576,11 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def get_environment(
         self,
-        request: Union[environments.GetEnvironmentRequest, dict] = None,
+        request: Optional[Union[environments.GetEnvironmentRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> environments.Environment:
         r"""Get an existing environment.
@@ -666,11 +677,11 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def list_environments(
         self,
-        request: Union[environments.ListEnvironmentsRequest, dict] = None,
+        request: Optional[Union[environments.ListEnvironmentsRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListEnvironmentsPager:
         r"""List environments.
@@ -781,13 +792,13 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def update_environment(
         self,
-        request: Union[environments.UpdateEnvironmentRequest, dict] = None,
+        request: Optional[Union[environments.UpdateEnvironmentRequest, dict]] = None,
         *,
-        name: str = None,
-        environment: environments.Environment = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        name: Optional[str] = None,
+        environment: Optional[environments.Environment] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Update an environment.
@@ -1098,11 +1109,11 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def delete_environment(
         self,
-        request: Union[environments.DeleteEnvironmentRequest, dict] = None,
+        request: Optional[Union[environments.DeleteEnvironmentRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Delete an environment.
@@ -1221,10 +1232,10 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def restart_web_server(
         self,
-        request: Union[environments.RestartWebServerRequest, dict] = None,
+        request: Optional[Union[environments.RestartWebServerRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Restart Airflow web server.
@@ -1315,10 +1326,10 @@ class EnvironmentsClient(metaclass=EnvironmentsClientMeta):
 
     def check_upgrade(
         self,
-        request: Union[environments.CheckUpgradeRequest, dict] = None,
+        request: Optional[Union[environments.CheckUpgradeRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Check if an upgrade operation on the environment will
