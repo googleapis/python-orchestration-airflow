@@ -7,12 +7,12 @@
         "google/cloud/orchestration/airflow/service/gapic_version.py",
         {
           "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_service_v1.json",
+          "path": "samples/generated_samples/snippet_metadata_google.cloud.orchestration.airflow.service.v1.json",
           "jsonpath": "$.clientLibrary.version"
         },
         {
           "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_service_v1beta1.json",
+          "path": "samples/generated_samples/snippet_metadata_google.cloud.orchestration.airflow.service.v1beta1.json",
           "jsonpath": "$.clientLibrary.version"
         }
       ]
