@@ -66,7 +66,7 @@ class OperationMetadata(proto.Message):
             SUCCEEDED (3):
                 The operation completed successfully.
             SUCCESSFUL (3):
-                No description available.
+
             FAILED (4):
                 The operation is no longer running but did
                 not succeed.
