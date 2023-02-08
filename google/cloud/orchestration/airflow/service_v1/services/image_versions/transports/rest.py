@@ -14,24 +14,21 @@
 # limitations under the License.
 #
 
-from google.auth.transport.requests import AuthorizedSession  # type: ignore
-import json  # type: ignore
-import grpc  # type: ignore
-from google.auth.transport.grpc import SslCredentials  # type: ignore
-from google.auth import credentials as ga_credentials  # type: ignore
-from google.api_core import exceptions as core_exceptions
-from google.api_core import retry as retries
-from google.api_core import rest_helpers
-from google.api_core import rest_streaming
-from google.api_core import path_template
-from google.api_core import gapic_v1
-
-from google.protobuf import json_format
-from requests import __version__ as requests_version
 import dataclasses
+import json  # type: ignore
 import re
 from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
+
+from google.api_core import gapic_v1, path_template, rest_helpers, rest_streaming
+from google.api_core import exceptions as core_exceptions
+from google.api_core import retry as retries
+from google.auth import credentials as ga_credentials  # type: ignore
+from google.auth.transport.grpc import SslCredentials  # type: ignore
+from google.auth.transport.requests import AuthorizedSession  # type: ignore
+from google.protobuf import json_format
+import grpc  # type: ignore
+from requests import __version__ as requests_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -39,10 +36,10 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 
-from google.cloud.orchestration.airflow.service_v1beta1.types import image_versions
+from google.cloud.orchestration.airflow.service_v1.types import image_versions
 
-from .base import ImageVersionsTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
-
+from .base import DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
+from .base import ImageVersionsTransport
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
     gapic_version=BASE_DEFAULT_CLIENT_INFO.gapic_version,
@@ -79,7 +76,12 @@ class ImageVersionsRestInterceptor:
 
 
     """
-    def pre_list_image_versions(self, request: image_versions.ListImageVersionsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[image_versions.ListImageVersionsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_image_versions(
+        self,
+        request: image_versions.ListImageVersionsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[image_versions.ListImageVersionsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_image_versions
 
         Override in a subclass to manipulate the request or metadata
@@ -87,7 +89,9 @@ class ImageVersionsRestInterceptor:
         """
         return request, metadata
 
-    def post_list_image_versions(self, response: image_versions.ListImageVersionsResponse) -> image_versions.ListImageVersionsResponse:
+    def post_list_image_versions(
+        self, response: image_versions.ListImageVersionsResponse
+    ) -> image_versions.ListImageVersionsResponse:
         """Post-rpc interceptor for list_image_versions
 
         Override in a subclass to manipulate the response
@@ -117,20 +121,21 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
 
     """
 
-    def __init__(self, *,
-            host: str = 'composer.googleapis.com',
-            credentials: Optional[ga_credentials.Credentials] = None,
-            credentials_file: Optional[str] = None,
-            scopes: Optional[Sequence[str]] = None,
-            client_cert_source_for_mtls: Optional[Callable[[
-                ], Tuple[bytes, bytes]]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            always_use_jwt_access: Optional[bool] = False,
-            url_scheme: str = 'https',
-            interceptor: Optional[ImageVersionsRestInterceptor] = None,
-            api_audience: Optional[str] = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        host: str = "composer.googleapis.com",
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
+        url_scheme: str = "https",
+        interceptor: Optional[ImageVersionsRestInterceptor] = None,
+        api_audience: Optional[str] = None,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -169,7 +174,9 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
         # credentials object
         maybe_url_match = re.match("^(?P<scheme>http(?:s)?://)?(?P<host>.*)$", host)
         if maybe_url_match is None:
-            raise ValueError(f"Unexpected hostname structure: {host}")  # pragma: NO COVER
+            raise ValueError(
+                f"Unexpected hostname structure: {host}"
+            )  # pragma: NO COVER
 
         url_match_items = maybe_url_match.groupdict()
 
@@ -180,10 +187,11 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
             credentials=credentials,
             client_info=client_info,
             always_use_jwt_access=always_use_jwt_access,
-            api_audience=api_audience
+            api_audience=api_audience,
         )
         self._session = AuthorizedSession(
-            self._credentials, default_host=self.DEFAULT_HOST)
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
         if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._interceptor = interceptor or ImageVersionsRestInterceptor()
@@ -193,12 +201,14 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
         def __hash__(self):
             return hash("ListImageVersions")
 
-        def __call__(self,
-                request: image_versions.ListImageVersionsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> image_versions.ListImageVersionsResponse:
+        def __call__(
+            self,
+            request: image_versions.ListImageVersionsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> image_versions.ListImageVersionsResponse:
             r"""Call the list image versions method over HTTP.
 
             Args:
@@ -219,36 +229,41 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1beta1/{parent=projects/*/locations/*}/imageVersions',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*}/imageVersions",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_image_versions(request, metadata)
+            request, metadata = self._interceptor.pre_list_image_versions(
+                request, metadata
+            )
             pb_request = image_versions.ListImageVersionsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -264,12 +279,15 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
             return resp
 
     @property
-    def list_image_versions(self) -> Callable[
-            [image_versions.ListImageVersionsRequest],
-            image_versions.ListImageVersionsResponse]:
+    def list_image_versions(
+        self,
+    ) -> Callable[
+        [image_versions.ListImageVersionsRequest],
+        image_versions.ListImageVersionsResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListImageVersions(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListImageVersions(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
     def kind(self) -> str:
@@ -279,6 +297,4 @@ class ImageVersionsRestTransport(ImageVersionsTransport):
         self._session.close()
 
 
-__all__=(
-    'ImageVersionsRestTransport',
-)
+__all__ = ("ImageVersionsRestTransport",)
